@@ -1,10 +1,10 @@
 import './lib/setup';
-import { LogLevel, SapphireClient } from '@sapphire/framework';
+import { container, LogLevel, SapphireClient } from '@sapphire/framework';
+import { Firebase } from './lib/database/Firebase';
+import { firebaseConfig } from './lib/constants';
+import { credential } from 'firebase-admin';
 
 const client = new SapphireClient({
-	defaultPrefix: 'dr!',
-	regexPrefix: /^(hey +)?bot[,! ]/i,
-	caseInsensitiveCommands: true,
 	logger: {
 		level: LogLevel.Debug
 	},
@@ -35,3 +35,6 @@ const main = async () => {
 };
 
 main();
+container.db = new Firebase({
+	credential: credential.cert(JSON.parse(JSON.stringify(firebaseConfig))),
+});
