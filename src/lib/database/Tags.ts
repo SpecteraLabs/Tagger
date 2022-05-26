@@ -28,7 +28,7 @@ export namespace TagsCollection {
 		}
 
 		public async pushToCollection(guildId: string, data: Tag) {
-			const tags = (await this.findOne(guildId))!.tags;
+			const { tags } = (await this.findOne(guildId))!;
 			const docRef = this.collection.doc(guildId);
 			tags.push(data);
 

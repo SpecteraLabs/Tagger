@@ -34,7 +34,7 @@ const main = async () => {
 	}
 };
 
-main();
+void main();
 container.db = new Firebase({
-	credential: credential.cert(JSON.parse(JSON.stringify(firebaseConfig))),
+	credential: credential.cert(JSON.parse(JSON.stringify(firebaseConfig)))
 });
