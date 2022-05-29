@@ -83,6 +83,7 @@ export class Tag extends SubCommandPluginCommand {
 		const content = interaction.options.getString('content', true);
 		const options = interaction.options.getString('options');
 		const tag = makeTag(name, description, content, options!);
+		await this.container.client.guilds.cache.get(interaction.guild!.id)!.commands.create(tag.data);
 		await this.container.db.tags.pushToCollection(interaction.guild!.id, tag);
 		return interaction.reply(`Added tag **${name}**`);
 	}
