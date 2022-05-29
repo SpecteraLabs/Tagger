@@ -16,8 +16,8 @@ export class UserEvent extends Listener {
 
 	public run() {
 		this.printBanner();
+		void this.container.client.guilds.cache.get('859287138364030977')?.commands.set([]);
 		this.printStoreDebugInformation();
-		this.container.logger.info(this.container.stores.get('commands').get('test')?.applicationCommandRegistry);
 	}
 
 	private printBanner() {

@@ -539,12 +539,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/plugin-subcommands@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@sapphire/plugin-subcommands@npm:2.2.0"
+"@sapphire/plugin-subcommands@npm:pr-271":
+  version: 3.0.0-pr-271.cde343c3.0
+  resolution: "@sapphire/plugin-subcommands@npm:3.0.0-pr-271.cde343c3.0"
   dependencies:
-    tslib: ^2.3.1
-  checksum: ac4d3c80fe311455510e7be74ff077ec3d455cd11e39adf0428bd722081bcc28c3d1809be8d78da67cc5b37db49a5d12a88a60150bac6269d783353fedfc3a30
+    tslib: ^2.4.0
+  checksum: 634c139e874d2a8de3344f7221942023fd5c64245eed6152bd405c9dc9f559e18de4bd1441d858abe32d646e8ed9a21295c612618e5802f5f7d9806e8f8462d2
   languageName: node
   linkType: hard
 
@@ -4174,7 +4174,7 @@ __metadata:
     "@sapphire/plugin-editable-commands": ^1.2.0
     "@sapphire/plugin-hmr": ^1.2.0
     "@sapphire/plugin-logger": ^2.2.1
-    "@sapphire/plugin-subcommands": ^2.2.0
+    "@sapphire/plugin-subcommands": pr-271
     "@sapphire/prettier-config": 1.4.3
     "@sapphire/time-utilities": ^1.7.4
     "@sapphire/ts-config": 3.3.4
@@ -4192,6 +4192,8 @@ __metadata:
     npm-run-all: 4.1.5
     prettier: 2.6.2
     reflect-metadata: ^0.1.13
+    tagscript: ^1.2.1
+    tagscript-plugin-discord: next
     tsc-watch: 5.0.3
     typescript: 4.6.4
   languageName: unknown
@@ -4350,6 +4352,23 @@ __metadata:
   dependencies:
     has-flag: ^4.0.0
   checksum: 3dda818de06ebbe5b9653e07842d9479f3555ebc77e9a0280caf5a14fb877ffee9ed57007c3b78f5a6324b8dbeec648d9e97a24e2ed9fdb81ddc69ea07100f4a
+  languageName: node
+  linkType: hard
+
+"tagscript-plugin-discord@npm:next":
+  version: 1.2.0-next.e052c6a.0
+  resolution: "tagscript-plugin-discord@npm:1.2.0-next.e052c6a.0"
+  peerDependencies:
+    discord.js: ^13.5.0
+    tagscript: "*"
+  checksum: 882d9bb05e00801babdf6a970893c01976a94fa488b933ae3db881f12f54b68fb9d4e014fbd2d1c86debd18155834427b9a410af05773bf8e717e2042e03ab17
+  languageName: node
+  linkType: hard
+
+"tagscript@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "tagscript@npm:1.2.1"
+  checksum: 3343a66b63b51250f92e1d03ab48528a437032e74dffc6a20a78bb6d7cbb21fa1824bc62991387dab4b3fb18e9e83c610a679b4aa5d945869c8bb8a7b87e6aa4
   languageName: node
   linkType: hard
 

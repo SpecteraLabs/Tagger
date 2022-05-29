@@ -12,15 +12,18 @@ export namespace TagsCollection {
 
 		public async findOne(id: string) {
 			const ref = this.collection.doc(id);
-			if (!ref) return;
-			const result = await ref.get();
-			return result.data() as Promise<Tags>;
+			const result = (await ref.get()).data();
+			if (!result) {
+				await this.createOne(id, {});
+				return;
+			}
+			return result as Promise<Tags>;
 		}
 
 		public async createOne(guildId: string, data: unknown) {
 			if (Array.isArray(data))
 				return this.collection.doc(guildId).set({
-					tags: [...data]
+					tags: data
 				});
 			return this.collection.doc(guildId).set({
 				tags: [data]
@@ -37,6 +40,16 @@ export namespace TagsCollection {
 			});
 		}
 
+		public async removeFromCollection(guildId: string, name: string) {
+			const { tags } = (await this.findOne(guildId))!;
+			const docRef = this.collection.doc(guildId);
+			const newTags = tags.filter((t) => t.data.name !== name);
+
+			return docRef.update({
+				tags: [...newTags]
+			});
+		}
+
 		public async deleteOne(guildId: string) {
 			const docRef = this.collection.doc(guildId);
 			return docRef.delete();
@@ -48,9 +61,11 @@ export namespace TagsCollection {
 	}
 
 	export interface Tag {
-		name: string;
-		description: string;
-		options: ApplicationCommandOptionData;
-		response: string;
+		data: {
+			name: string;
+			description: string;
+			options: ApplicationCommandOptionData[];
+		};
+		content: string;
 	}
 }

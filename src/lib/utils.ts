@@ -1,22 +1,34 @@
-import { send } from '@sapphire/plugin-editable-commands';
-import { Message, MessageEmbed } from 'discord.js';
-import { RandomLoadingMessage } from './constants';
+import type { ApplicationCommandOptionData } from 'discord.js';
 
-/**
- * Picks a random item from an array
- * @param array The array to pick a random item from
- * @example
- * const randomEntry = pickRandom([1, 2, 3, 4]) // 1
- */
-export function pickRandom<T>(array: readonly T[]): T {
-	const { length } = array;
-	return array[Math.floor(Math.random() * length)];
+const regex = /\{[^}]*\}/g;
+
+export function parseOptions(options?: string) {
+	if (!options) return [];
+	if (!regex.test(options)) throw new Error('Invalid options provided');
+	const parsedOptions = options.match(regex)!;
+	const optionsArray = new Set();
+	for (const option of parsedOptions) {
+		const parsedOption = option.replace(/[{}]/g, '');
+		const [name, description, type, required] = parsedOption.split('|');
+		optionsArray.add({
+			name,
+			description,
+			type,
+			required: Boolean(required) ?? false
+		});
+	}
+	const returnable = [...optionsArray];
+	return returnable as ApplicationCommandOptionData[];
 }
 
-/**
- * Sends a loading message to the current channel
- * @param message The message data for which to send the loading message
- */
-export function sendLoadingMessage(message: Message): Promise<typeof message> {
-	return send(message, { embeds: [new MessageEmbed().setDescription(pickRandom(RandomLoadingMessage)).setColor('#FF0000')] });
+export function makeTag(name: string, description: string, content: string, options?: string) {
+	const parsedOptions = parseOptions(options);
+	return {
+		data: {
+			name,
+			description,
+			options: parsedOptions
+		},
+		content
+	};
 }
