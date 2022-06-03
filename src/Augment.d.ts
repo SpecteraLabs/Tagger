@@ -1,9 +1,9 @@
 import type { Interpreter } from 'tagscript';
-import type { Firebase } from './lib/database/Firebase';
+import type { TagsManager } from './lib/database/TagsManager';
 
 declare module '@sapphire/pieces' {
 	interface Container {
-		db: Firebase;
+		tags: TagsManager;
 		tagscript: Interpreter;
 	}
 }

@@ -1,6 +1,7 @@
 import type { ApplicationCommandOptionData } from 'discord.js';
 
 const regex = /\{[^}]*\}/g;
+const optionTypes = ['STRING', 'INTEGER', 'BOOLEAN', 'USER', 'CHANNEL', 'ROLE', 'MENTIONABLE', 'NUMBER'];
 
 export function parseOptions(options?: string) {
 	if (!options) return [];
@@ -10,6 +11,8 @@ export function parseOptions(options?: string) {
 	for (const option of parsedOptions) {
 		const parsedOption = option.replace(/[{}]/g, '');
 		const [name, description, type, required] = parsedOption.split('|');
+		if (!optionTypes.includes(type.toUpperCase()))
+			throw new Error(`OptionType should be 'string' or 'number' or 'boolean' but recieved '${type}'`);
 		optionsArray.add({
 			name,
 			description,

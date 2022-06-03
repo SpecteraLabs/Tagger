@@ -1,6 +1,6 @@
 import './lib/setup';
 import { container, LogLevel, SapphireClient } from '@sapphire/framework';
-import { Firebase } from './lib/database/Firebase';
+import { TagsManager } from './lib/database/TagsManager';
 import { firebaseConfig } from './lib/constants';
 import { credential } from 'firebase-admin';
 import {
@@ -55,7 +55,7 @@ const main = async () => {
 };
 
 void main();
-container.db = new Firebase({
+container.tags = new TagsManager({
 	credential: credential.cert(JSON.parse(JSON.stringify(firebaseConfig)))
 });
 container.tagscript = new Interpreter(

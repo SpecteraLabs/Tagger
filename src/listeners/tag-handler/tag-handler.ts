@@ -19,7 +19,7 @@ export class TagHandler extends Listener {
 	public async run(interaction: Interaction) {
 		if (!interaction.guild || !interaction.isCommand() || !isGuildMember(interaction.member) || !isGuildBasedChannel(interaction.channel)) return;
 		const { commandName: command } = interaction;
-		const result = await this.container.db.tags.findOne(interaction.guild.id);
+		const result = await this.container.tags.db.findOne(interaction.guild.id);
 		if (!result || !result.tags) return;
 		const tag = result.tags.find((t) => t.data?.name === command);
 		if (!tag) return;

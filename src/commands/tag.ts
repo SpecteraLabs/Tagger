@@ -16,6 +16,10 @@ import { makeTag } from '../lib/utils';
 				{
 					name: 'list',
 					to: 'listTags'
+				},
+				{
+					name: 'remove',
+					to: 'removeTag'
 				}
 			])
 		]
@@ -46,7 +50,7 @@ import { makeTag } from '../lib/utils';
 						.setName('remove')
 						.setDescription('Remove a tag from the server')
 						.addStringOption((option) => {
-							return option.setName('name').setDescription('The name of the tag').setRequired(true);
+							return option.setName('name').setAutocomplete(true).setDescription('The name of the tag').setRequired(true);
 						});
 				})
 				.addSubcommand((subcommand) => {
@@ -84,17 +88,25 @@ export class Tag extends SubCommandPluginCommand {
 		const options = interaction.options.getString('options');
 		const tag = makeTag(name, description, content, options!);
 		await this.container.client.guilds.cache.get(interaction.guild!.id)!.commands.create(tag.data);
-		await this.container.db.tags.pushToCollection(interaction.guild!.id, tag);
+		await this.container.tags.db.pushToCollection(interaction.guild!.id, tag);
 		return interaction.reply(`Added tag **${name}**`);
 	}
 
 	public async listTags(interaction: CommandInteraction) {
-		const tags = await this.container.db.tags.findOne(interaction.guild!.id);
-		if (!tags || !tags.tags.length) return interaction.reply('No tags found');
+		const tags = await this.container.tags.db.findOne(interaction.guild!.id);
+		if (!tags || !tags.size) return interaction.reply('No tags found');
 		return interaction.reply({
-			content: `${tags.tags.map((tag) => {
+			content: `${tags.map((tag) => {
 				return `**${tag.data?.name}**: ${tag.data?.description}`;
 			})}`
 		});
+	}
+
+	public async removeTag(interaction: CommandInteraction) {
+		const name = interaction.options.getString('name', true);
+		const tags = await this.container.tags.db.findOne(interaction.guild!.id);
+		if (!tags?.get(name)) return interaction.reply('No tag found');
+		await this.container.tags.db.removeFromCollection(interaction.guild!.id, name);
+		return interaction.reply(`Removed tag **${name}**`);
 	}
 }
