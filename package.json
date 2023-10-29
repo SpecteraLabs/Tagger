@@ -32,7 +32,7 @@
 	},
 	"devDependencies": {
 		"@sapphire/eslint-config": "^4.3.6",
-		"@sapphire/prettier-config": "1.4.3",
+		"@sapphire/prettier-config": "2.0.0",
 		"@sapphire/ts-config": "3.3.4",
 		"@types/node": "16.11.39",
 		"@types/ws": "8.5.3",
