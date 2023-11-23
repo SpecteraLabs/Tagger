@@ -23,7 +23,7 @@
 		"@typescript-eslint/parser": "latest",
 		"discord.js": "^13.8.0",
 		"dotenv-cra": "^3.0.2",
-		"firebase-admin": "^10.2.0",
+		"firebase-admin": "^11.11.1",
 		"fuse.js": "^6.6.2",
 		"redis": "^4.1.0",
 		"reflect-metadata": "^0.1.13",
