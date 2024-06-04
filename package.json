@@ -31,7 +31,7 @@
 		"tagscript-plugin-discord": "next"
 	},
 	"devDependencies": {
-		"@sapphire/eslint-config": "^4.3.6",
+		"@sapphire/eslint-config": "^5.0.5",
 		"@sapphire/prettier-config": "1.4.3",
 		"@sapphire/ts-config": "3.3.4",
 		"@types/node": "16.11.39",
